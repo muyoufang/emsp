@@ -1,0 +1,37 @@
+server:
+  port: 8090
+  servlet:
+    session:
+      timeout: 60
+
+spring:
+  datasource:
+    url: jdbc:sqlite::resource:static/sqlite/website.db
+    driver-class-name: org.sqlite.JDBC
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:/mapper/**/*.xml
+
+kisso:
+  config:
+    signkey: C691d971EJ3H376G8120   # 对称签名密钥
+    cookieName: website             # COOKIE 名称
+
+project:
+  url: http://localhost:8090
+  path: /Users/mac/Desktop/gitee/java_xdxydl/website/file
+  autograph: 20001857
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.emsp.business.mapper.ChargingStationsPileMapper">
+    <select id="findListByParams" parameterType="map" resultType="com.demo.emsp.business.vo.PileVo">
+        SELECT t1.*,
+                t2.id as stationId,
+                t2.station_code,
+                t2.station_name,
+                t2.province,
+                t2.city,
+                t2.address,
+                t2.station_lng,
+                t2.station_lat,
+                t2.station_status,
+                t2.operator_id,
+                t2.park_fee,
+                t2.start_time,
+                t2.end_time
+        <include refid="sql_where"/>
+        ORDER BY t1.update_time desc
+        <if test="startIndex != null and pageSize != 0">
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="findCountByParams" parameterType="map" resultType="long">
+        SELECT count(1)
+        <include refid="sql_where"/>
+    </select>
+    <sql id="sql_where">
+        FROM charging_station_pile t1
+        LEFT JOIN charging_operator_station t2 on t2.id = t1.station_id
+        <where>
+            t1.id is not null
+            <if test="stationLng != null and stationLng != ''">
+                AND t2.station_lng = #{stationLng}
+            </if>
+            <if test="stationLat != null and stationLat != ''">
+                AND t2.station_lat = #{stationLat}
+            </if>
+        </where>
+    </sql>
+</mapper>

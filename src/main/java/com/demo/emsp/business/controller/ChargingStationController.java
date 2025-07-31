@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author muyoufang
@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/business/charging_operator_stations")
-@Api(value = "充电站 Controller",tags = {"充电站接口"})
+@Api(value = "充电站 Controller", tags = {"充电站接口"})
 public class ChargingStationController {
     @Autowired
     private IChargingOperatorStationService service;
@@ -66,7 +66,7 @@ public class ChargingStationController {
     @ApiOperation(value = "详情")
     public ResponseEntity<R> getInfo(@NotNull(message = "id不能为空") @PathVariable("id") Integer id) {
         ChargingStation result = service.getById(id);
-        if(result == null){
+        if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(R.error("查询数据不存在"));
         }
         return ResponseEntity.ok(R.ok(result));

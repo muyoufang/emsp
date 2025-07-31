@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author muyoufang
@@ -22,7 +22,7 @@ public class ChargingStationPile extends BaseEntity {
     private String pileNumber;
     @ApiModelProperty(name = "桩名称")
     private String pileName;
-//    @ApiModelProperty(name = "额定总功率")
+    //    @ApiModelProperty(name = "额定总功率")
 //    private String power;
     @ApiModelProperty(name = "设备类型(直流、交流、交直一体、其它)")
     private String pileType;

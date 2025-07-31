@@ -14,7 +14,24 @@ public enum PileStatusEnum {
     INOPERATIVE("维护中", "INOPERATIVE"),
     REMOVED("已停用", "REMOVED");
 
+    public static final List<Map<String, Object>> infoList = new ArrayList<>();
+
+    static {
+        for (PileStatusEnum v : PileStatusEnum.values()) {
+            Map<String, Object> info = new HashMap<>();
+            info.put("value", v.value);
+            info.put("lable", v.lable);
+            infoList.add(info);
+        }
+    }
+
     private final String value;
+    private final String lable;
+
+    PileStatusEnum(String lable, String value) {
+        this.lable = lable;
+        this.value = value;
+    }
 
     public static PileStatusEnum getByValue(String value) {
         for (PileStatusEnum v : PileStatusEnum.values()) {
@@ -24,9 +41,6 @@ public enum PileStatusEnum {
         }
         return null;
     }
-
-
-    private final String lable;
 
     public static String checkConversion(String oStatus, String nStatus) {
         if (BLOCKED.value.equals(oStatus) && INOPERATIVE.value.equals(nStatus)) {
@@ -41,17 +55,6 @@ public enum PileStatusEnum {
         return "";
     }
 
-    PileStatusEnum(String lable, String value) {
-        this.lable = lable;
-        this.value = value;
-    }
-
-    public static final List<Map<String, Object>> infoList = new ArrayList<>();
-
-    public String getValue() {
-        return value;
-    }
-
     public static String getLabelByValue(String value) {
         PileStatusEnum obj = getByValue(value);
         if (obj != null) {
@@ -60,13 +63,8 @@ public enum PileStatusEnum {
         return "";
     }
 
-    static {
-        for (PileStatusEnum v : PileStatusEnum.values()) {
-            Map<String, Object> info = new HashMap<>();
-            info.put("value", v.value);
-            info.put("lable", v.lable);
-            infoList.add(info);
-        }
+    public String getValue() {
+        return value;
     }
 
     public String getLable() {

@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author muyoufang
@@ -36,19 +36,22 @@ import java.util.Map;
 public class ChargingPileGunServiceImpl extends ServiceImpl<ChargingPileGunMapper, ChargingPileGun> implements IChargingPileGunService {
     @Autowired
     private IChargingStationsPileService pileService;
+
     @Override
     public R selectPage(PileGunDto dto, Integer pageNo, Integer limit) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingPileGun> queryWrapper = new QueryWrapper<ChargingPileGun>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingPileGun> queryWrapper = new QueryWrapper<ChargingPileGun>().allEq(params).orderByDesc(
+                "update_time");
         IPage<ChargingPileGun> IPage = getBaseMapper().selectPage(new Page<>(pageNo, limit), queryWrapper);
         List<ChargingPileGun> records = IPage.getRecords();
         return R.ok(IPage);
     }
 
     @Override
-    public R selectList(PileGunDto dto){
+    public R selectList(PileGunDto dto) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingPileGun> queryWrapper = new QueryWrapper<ChargingPileGun>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingPileGun> queryWrapper = new QueryWrapper<ChargingPileGun>().allEq(params).orderByDesc(
+                "update_time");
         List<ChargingPileGun> result = getBaseMapper().selectList(queryWrapper);
         return R.ok(result);
     }
@@ -64,7 +67,7 @@ public class ChargingPileGunServiceImpl extends ServiceImpl<ChargingPileGunMappe
         if (getBaseMapper().selectOne(new QueryWrapper<ChargingPileGun>()
                 .eq("gun_name", gunName)
                 .eq("pile_id",
-                pileId)) != null) {
+                        pileId)) != null) {
             return R.error("充电枪名称已存在");
         }
         ChargingPileGun obj = new ChargingPileGun();
@@ -89,7 +92,7 @@ public class ChargingPileGunServiceImpl extends ServiceImpl<ChargingPileGunMappe
         Integer id = dto.getId();
         dto.setGunName(null); // 充电枪名不能修改
         dto.setPileId(null);
-        if(ObjectUtil.isNull( id)){
+        if (ObjectUtil.isNull(id)) {
             return R.error("请输入修改对象Id");
         }
         ChargingPileGun obj = getBaseMapper().selectById(dto.getId());

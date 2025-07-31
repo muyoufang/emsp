@@ -1,10 +1,6 @@
 package com.demo.emsp.business.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.demo.emsp.code.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author muyoufang
@@ -22,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("charging_pile_gun")
-public class ChargingPileGun  extends BaseEntity {
+public class ChargingPileGun extends BaseEntity {
 
     @ApiModelProperty(name = "充电枪名称")
     private String gunName;

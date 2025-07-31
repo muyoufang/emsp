@@ -37,7 +37,8 @@ public class ByteUtil {
      */
     public static byte[] objectToByte(Object obj) {
         byte[] bytes = null;
-        try (ByteArrayOutputStream bo = new ByteArrayOutputStream();ObjectOutputStream oo = new ObjectOutputStream(bo);){
+        try (ByteArrayOutputStream bo = new ByteArrayOutputStream(); ObjectOutputStream oo =
+                new ObjectOutputStream(bo)) {
             //开始写入输出流
             oo.writeObject(obj);
             //输出流转byte
@@ -54,7 +55,8 @@ public class ByteUtil {
      */
     public static Object byteToObject(byte[] bytes) {
         Object obj = null;
-        try (ByteArrayInputStream bi = new ByteArrayInputStream(bytes);ObjectInputStream oi = new ObjectInputStream(bi);){
+        try (ByteArrayInputStream bi = new ByteArrayInputStream(bytes); ObjectInputStream oi =
+                new ObjectInputStream(bi)) {
             //读取输入流
             obj = oi.readObject();
         } catch (Exception e) {

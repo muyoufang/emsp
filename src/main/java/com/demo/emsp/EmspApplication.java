@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
 @EnableSwagger2
 public class EmspApplication {
 
-    private static Logger logger = LoggerFactory.getLogger(EmspApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmspApplication.class);
 
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(EmspApplication.class, args);

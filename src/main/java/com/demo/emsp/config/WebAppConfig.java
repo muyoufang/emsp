@@ -1,17 +1,15 @@
 package com.demo.emsp.config;
 
 
-import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 只是对文件路径进行了拦截
  * 其他接口和网络页面默认就是通过的
+ *
  * @author muyoufang
  */
 @Configuration

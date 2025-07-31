@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author muyoufang
@@ -22,10 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/business/charging_nation_code")
-@Api(value = "国家编码 Controller",tags = {"国家编码接口"})
+@Api(value = "国家编码 Controller", tags = {"国家编码接口"})
 public class ChargingNationCodeController {
     @Autowired
     private IChargingNationCodeService service;
+
     @GetMapping("/page")
     @ApiOperation(value = "分页")
     public R selectPage(ChargingNationCodeDto dto,

@@ -12,6 +12,17 @@ public enum StationStatusEnum {
     OPERATION_ING("正常运营", 0),
     OPERATION_ED("停止运营", 1);
 
+    public static final List<Map<String, Object>> infoList = new ArrayList<>();
+
+    static {
+        for (StationStatusEnum v : StationStatusEnum.values()) {
+            Map<String, Object> info = new HashMap<>();
+            info.put("value", v.value);
+            info.put("lable", v.lable);
+            infoList.add(info);
+        }
+    }
+
     private final int value;
     private final String lable;
 
@@ -19,8 +30,6 @@ public enum StationStatusEnum {
         this.lable = lable;
         this.value = value;
     }
-
-    public static final List<Map<String, Object>> infoList = new ArrayList<>();
 
     public static StationStatusEnum getByValue(int value) {
         for (StationStatusEnum v : StationStatusEnum.values()) {
@@ -37,14 +46,5 @@ public enum StationStatusEnum {
             return obj.lable;
         }
         return "";
-    }
-
-    static {
-        for (StationStatusEnum v : StationStatusEnum.values()) {
-            Map<String, Object> info = new HashMap<>();
-            info.put("value", v.value);
-            info.put("lable", v.lable);
-            infoList.add(info);
-        }
     }
 }

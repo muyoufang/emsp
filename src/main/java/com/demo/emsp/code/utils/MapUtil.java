@@ -26,12 +26,6 @@ public class MapUtil extends HashMap<String, Object> {
 
     private static final Logger log = LoggerFactory.getLogger(MapUtil.class);
 
-    @Override
-    public MapUtil put(String key, Object value) {
-        super.put(key, value);
-        return this;
-    }
-
     /************************************************************************
      * @author: wg
      * @description: 判断 map 的值 是否都为空
@@ -221,5 +215,11 @@ public class MapUtil extends HashMap<String, Object> {
         }
 
         return dtoMap;
+    }
+
+    @Override
+    public MapUtil put(String key, Object value) {
+        super.put(key, value);
+        return this;
     }
 }

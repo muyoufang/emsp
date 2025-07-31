@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 
 /**
  * MD5 工具类
+ *
  * @author muyoufang
  */
 @Slf4j

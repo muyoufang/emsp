@@ -1,6 +1,5 @@
 package com.demo.emsp.business.vo;
 
-import com.demo.emsp.business.dto.PileGunDto;
 import com.demo.emsp.business.dto.StationPileDto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author muyoufang

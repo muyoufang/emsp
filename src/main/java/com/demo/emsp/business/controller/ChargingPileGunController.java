@@ -1,11 +1,11 @@
 package com.demo.emsp.business.controller;
 
 
-import com.demo.emsp.business.dto.*;
+import com.demo.emsp.business.dto.PileGunCreateDto;
+import com.demo.emsp.business.dto.PileGunDto;
+import com.demo.emsp.business.dto.PileGunStatusDto;
 import com.demo.emsp.business.entity.ChargingPileGun;
-import com.demo.emsp.business.entity.ChargingStationPile;
 import com.demo.emsp.business.service.IChargingPileGunService;
-import com.demo.emsp.business.service.IChargingStationsPileService;
 import com.demo.emsp.code.entity.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author muyoufang
@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
  */
 @RestController
 @RequestMapping("/business/charging_pile_gun")
-@Api(value = "充电桩连接口 Controller",tags = {"充电桩连接口"})
+@Api(value = "充电桩连接口 Controller", tags = {"充电桩连接口"})
 public class ChargingPileGunController {
     @Autowired
     private IChargingPileGunService service;
@@ -59,7 +59,7 @@ public class ChargingPileGunController {
     @ApiOperation(value = "详情")
     public ResponseEntity<R> getInfo(@NotNull(message = "id不能为空") @PathVariable("id") Integer id) {
         ChargingPileGun result = service.getById(id);
-        if(result == null){
+        if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(R.error("查询数据不存在"));
         }
         return ResponseEntity.ok(R.ok(result));

@@ -3,20 +3,17 @@ package com.demo.emsp.config;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;
 import org.springframework.boot.web.server.ErrorPageRegistry;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
 
 /**
- * @描叙：  错误页面配置
- *
  * @author muyoufang
+ * @描叙： 错误页面配置
  */
 //@Configuration
 public class ErrorPageConfig implements ErrorPageRegistrar {
 
     /**
-     *
      * @param registry
      */
     @Override
@@ -27,6 +24,6 @@ public class ErrorPageConfig implements ErrorPageRegistrar {
         /*错误类型为500，表示服务器响应错误，默认显示500.html网页*/
         ErrorPage e500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500.html");
         ErrorPage e400 = new ErrorPage(HttpStatus.BAD_REQUEST, "/error/500.html");
-        registry.addErrorPages(e400 ,e404, e500);
+        registry.addErrorPages(e400, e404, e500);
     }
 }

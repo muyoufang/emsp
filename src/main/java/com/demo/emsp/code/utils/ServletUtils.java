@@ -111,11 +111,7 @@ public class ServletUtils {
         }
 
         String xRequestedWith = request.getHeader("X-Requested-With");
-        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1) {
-            return true;
-        }
-
-        return false;
+        return xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1;
     }
 
     /**

@@ -2,7 +2,6 @@ package com.demo.emsp.code.exception;
 
 import com.demo.emsp.code.entity.R;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Results;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -79,7 +78,8 @@ public class SiteExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public R handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
+    public R handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e,
+                                                       HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.warn("请求参数类型不匹配'{}',发生系统异常:{}", requestURI, e.getMessage());
         return R.error(

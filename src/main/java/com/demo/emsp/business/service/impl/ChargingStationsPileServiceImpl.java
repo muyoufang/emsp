@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,14 +11,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.demo.emsp.business.dto.PileGunStatusDto;
 import com.demo.emsp.business.dto.StationPileCreateDto;
 import com.demo.emsp.business.dto.StationPileDto;
-import com.demo.emsp.business.entity.ChargingPileGun;
-import com.demo.emsp.business.entity.ChargingStation;
 import com.demo.emsp.business.entity.ChargingStationPile;
 import com.demo.emsp.business.enums.PileStatusEnum;
 import com.demo.emsp.business.enums.PileTypeEnum;
 import com.demo.emsp.business.mapper.ChargingStationsPileMapper;
 import com.demo.emsp.business.service.IChargingOperatorStationService;
-import com.demo.emsp.business.service.IChargingPileGunService;
 import com.demo.emsp.business.service.IChargingStationsPileService;
 import com.demo.emsp.business.vo.PileVo;
 import com.demo.emsp.code.entity.R;
@@ -33,9 +29,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -63,7 +57,7 @@ public class ChargingStationsPileServiceImpl extends ServiceImpl<ChargingStation
         if (limit < 0) {
             limit = 10;
         }
-        long startIndex = (pageNo - 1) * limit;
+        long startIndex = (long) (pageNo - 1) * limit;
         params.put("startIndex", startIndex);
         params.put("pageSize", limit);
         List<PileVo> items = pileMapper.findListByParams(params);
@@ -74,9 +68,10 @@ public class ChargingStationsPileServiceImpl extends ServiceImpl<ChargingStation
     }
 
     @Override
-    public R selectList(StationPileDto dto){
+    public R selectList(StationPileDto dto) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingStationPile> queryWrapper = new QueryWrapper<ChargingStationPile>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingStationPile> queryWrapper =
+                new QueryWrapper<ChargingStationPile>().allEq(params).orderByDesc("update_time");
         List<ChargingStationPile> result = getBaseMapper().selectList(queryWrapper);
         return R.ok(result);
     }
@@ -120,7 +115,7 @@ public class ChargingStationsPileServiceImpl extends ServiceImpl<ChargingStation
     public R updateObjById(StationPileDto dto) {
         dto.setStationId(null);     //充电站ID不能修改
         dto.setPileStatus(null);    //充电桩状态不能修改
-        dto.setPileNumber( null);   //充电桩编号不能修改
+        dto.setPileNumber(null);   //充电桩编号不能修改
         Integer id = dto.getId();
         if (ObjectUtil.isNull(id)) {
             return R.error("请输入修改对象Id");
@@ -187,7 +182,8 @@ public class ChargingStationsPileServiceImpl extends ServiceImpl<ChargingStation
                 }
             }
             if(PileStatusEnum.BLOCKED.getValue().equals(targetStatus)){
-                if(sets.contains(PileStatusEnum.INOPERATIVE.getValue()) || sets.contains(PileStatusEnum.REMOVED.getValue())){
+                if(sets.contains(PileStatusEnum.INOPERATIVE.getValue()) || sets.contains(PileStatusEnum.REMOVED
+                .getValue())){
                     throw new SiteConfictException("充电枪在INOPERATIVE状态或REMOVED状态");
                 }
             }

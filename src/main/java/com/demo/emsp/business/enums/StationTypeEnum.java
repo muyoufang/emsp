@@ -14,6 +14,17 @@ public enum StationTypeEnum {
     SPECIAL("专用", 3),
     OTHER("其它", 4);
 
+    public static final List<Map<String, Object>> infoList = new ArrayList<>();
+
+    static {
+        for (StationTypeEnum v : StationTypeEnum.values()) {
+            Map<String, Object> info = new HashMap<>();
+            info.put("value", v.value);
+            info.put("lable", v.lable);
+            infoList.add(info);
+        }
+    }
+
     private final int value;
     private final String lable;
 
@@ -21,8 +32,6 @@ public enum StationTypeEnum {
         this.lable = lable;
         this.value = value;
     }
-
-    public static final List<Map<String, Object>> infoList = new ArrayList<>();
 
     public static StationTypeEnum getByValue(int value) {
         for (StationTypeEnum v : StationTypeEnum.values()) {
@@ -39,14 +48,5 @@ public enum StationTypeEnum {
             return obj.lable;
         }
         return "";
-    }
-
-    static {
-        for (StationTypeEnum v : StationTypeEnum.values()) {
-            Map<String, Object> info = new HashMap<>();
-            info.put("value", v.value);
-            info.put("lable", v.lable);
-            infoList.add(info);
-        }
     }
 }

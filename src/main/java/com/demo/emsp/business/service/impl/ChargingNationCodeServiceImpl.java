@@ -11,7 +11,6 @@ import com.demo.emsp.business.dto.ChargingNationCodeDto;
 import com.demo.emsp.business.entity.ChargingNationCode;
 import com.demo.emsp.business.mapper.ChargingNationCodeMapper;
 import com.demo.emsp.business.service.IChargingNationCodeService;
-import com.demo.emsp.code.entity.PageInfo;
 import com.demo.emsp.code.entity.R;
 import com.demo.emsp.code.utils.MapUtil;
 import com.demo.emsp.code.utils.TimeUtils;
@@ -22,7 +21,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author muyoufang
@@ -33,15 +32,17 @@ public class ChargingNationCodeServiceImpl extends ServiceImpl<ChargingNationCod
     @Override
     public R selectPage(ChargingNationCodeDto dto, Integer pageNo, Integer limit) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingNationCode> queryWrapper = new QueryWrapper<ChargingNationCode>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingNationCode> queryWrapper =
+                new QueryWrapper<ChargingNationCode>().allEq(params).orderByDesc("update_time");
         IPage<ChargingNationCode> IPage = getBaseMapper().selectPage(new Page<>(pageNo, limit), queryWrapper);
         return R.ok(IPage);
     }
 
     @Override
-    public R selectList(ChargingNationCodeDto dto){
+    public R selectList(ChargingNationCodeDto dto) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingNationCode> queryWrapper = new QueryWrapper<ChargingNationCode>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingNationCode> queryWrapper =
+                new QueryWrapper<ChargingNationCode>().allEq(params).orderByDesc("update_time");
         List<ChargingNationCode> result = getBaseMapper().selectList(queryWrapper);
         return R.ok(result);
     }

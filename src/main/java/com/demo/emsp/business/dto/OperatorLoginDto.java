@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author muyoufang

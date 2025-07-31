@@ -14,7 +14,7 @@ public class ListUtils {
      * 用于seo
      */
     public static String getStr2List(List<String> list) {
-        StringBuffer strBuf = new StringBuffer("");
+        StringBuffer strBuf = new StringBuffer();
 
         for (String date : list) {
             strBuf.append(date);

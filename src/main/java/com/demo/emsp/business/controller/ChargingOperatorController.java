@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author muyoufang
@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 @RestController
 @Validated
 @RequestMapping("/business/charging_operator")
-@Api(value = "运营商 Controller",tags = {"运营商接口"})
+@Api(value = "运营商 Controller", tags = {"运营商接口"})
 public class ChargingOperatorController {
     @Autowired
     private IChargingOperatorService service;
@@ -76,7 +76,7 @@ public class ChargingOperatorController {
         ChargingOperator operator = service.getById(id);
         if (operator != null) {
             operator.setPswd("");
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(R.error("查询数据不存在"));
         }
         return ResponseEntity.ok(R.ok(operator));
@@ -107,7 +107,7 @@ public class ChargingOperatorController {
             } else {
                 return R.error("原始密码错误");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return R.error("token信息不正确");
         }
 

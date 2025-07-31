@@ -14,18 +14,16 @@ import com.demo.emsp.business.enums.StationStatusEnum;
 import com.demo.emsp.business.mapper.ChargingOperatorStationMapper;
 import com.demo.emsp.business.service.IChargingOperatorStationService;
 import com.demo.emsp.code.entity.R;
-import com.demo.emsp.code.exception.SiteBadException;
 import com.demo.emsp.code.utils.MapUtil;
 import com.demo.emsp.code.utils.TimeUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author muyoufang
@@ -36,16 +34,18 @@ public class ChargingOperatorStationServiceImpl extends ServiceImpl<ChargingOper
     @Override
     public R selectPage(StationDto dto, Integer pageNo, Integer limit) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingStation> queryWrapper = new QueryWrapper<ChargingStation>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingStation> queryWrapper = new QueryWrapper<ChargingStation>().allEq(params).orderByDesc(
+                "update_time");
         IPage<ChargingStation> IPage = getBaseMapper().selectPage(new Page<>(pageNo, limit), queryWrapper);
         List<ChargingStation> records = IPage.getRecords();
         return R.ok(IPage);
     }
 
     @Override
-    public R selectList(StationDto dto){
+    public R selectList(StationDto dto) {
         Map<String, Object> params = MapUtil.bean2MapIgnoreNullValue(dto);
-        QueryWrapper<ChargingStation> queryWrapper = new QueryWrapper<ChargingStation>().allEq(params).orderByDesc("update_time");
+        QueryWrapper<ChargingStation> queryWrapper = new QueryWrapper<ChargingStation>().allEq(params).orderByDesc(
+                "update_time");
         List<ChargingStation> result = getBaseMapper().selectList(queryWrapper);
         return R.ok(result);
     }

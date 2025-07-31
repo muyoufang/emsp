@@ -46,7 +46,7 @@ public class ThymeleafUtil {
         context.setVariables(map);
 
         File file = new File(filePath + "/web");
-        if (!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         }
         // 创建输出流，关联到一个临时文件

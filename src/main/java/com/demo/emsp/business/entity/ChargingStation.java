@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author muyoufang
@@ -22,7 +22,7 @@ public class ChargingStation extends BaseEntity {
     private String stationCode;
     @ApiModelProperty(name = "充电站名称")
     private String stationName;
-//    @ApiModelProperty(name = "充电桩数")
+    //    @ApiModelProperty(name = "充电桩数")
 //    private Integer deviceNumber;
 //    @ApiModelProperty(name = "交流充电枪数")
 //    private Integer acGunNumber;

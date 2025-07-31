@@ -40,11 +40,13 @@ public class OkHttpUtils {
                             .connectTimeout(15, TimeUnit.SECONDS)
                             .writeTimeout(20, TimeUnit.SECONDS)
                             .readTimeout(20, TimeUnit.SECONDS)
-                            .sslSocketFactory(createSSLSocketFactory(trustManagers), (X509TrustManager) trustManagers[0])
+                            .sslSocketFactory(createSSLSocketFactory(trustManagers),
+                                    (X509TrustManager) trustManagers[0])
                             .hostnameVerifier((hostName, session) -> true)
                             .retryOnConnectionFailure(true)
                             .build();
-                    addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
+                    addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 "
+                            + "(KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36");
                 }
             }
         }
@@ -72,6 +74,42 @@ public class OkHttpUtils {
      */
     public static OkHttpUtils builder() {
         return new OkHttpUtils();
+    }
+
+    /**
+     * 生成安全套接字工厂，用于https请求的证书跳过
+     *
+     * @return
+     */
+    private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
+        SSLSocketFactory ssfFactory = null;
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            ssfFactory = sc.getSocketFactory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ssfFactory;
+    }
+
+    private static TrustManager[] buildTrustManagers() {
+        return new TrustManager[]{
+                new X509TrustManager() {
+                    @Override
+                    public void checkClientTrusted(X509Certificate[] chain, String authType) {
+                    }
+
+                    @Override
+                    public void checkServerTrusted(X509Certificate[] chain, String authType) {
+                    }
+
+                    @Override
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return new X509Certificate[]{};
+                    }
+                }
+        };
     }
 
     /**
@@ -200,7 +238,7 @@ public class OkHttpUtils {
      * 异步请求，有返回值
      */
     public String async() {
-        StringBuilder buffer = new StringBuilder("");
+        StringBuilder buffer = new StringBuilder();
         setHeader(request);
         okHttpClient.newCall(request.build()).enqueue(new Callback() {
             @Override
@@ -259,43 +297,6 @@ public class OkHttpUtils {
                 e.printStackTrace();
             }
         }
-    }
-
-
-    /**
-     * 生成安全套接字工厂，用于https请求的证书跳过
-     *
-     * @return
-     */
-    private static SSLSocketFactory createSSLSocketFactory(TrustManager[] trustAllCerts) {
-        SSLSocketFactory ssfFactory = null;
-        try {
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
-            ssfFactory = sc.getSocketFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ssfFactory;
-    }
-
-    private static TrustManager[] buildTrustManagers() {
-        return new TrustManager[]{
-                new X509TrustManager() {
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] chain, String authType) {
-                    }
-
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] chain, String authType) {
-                    }
-
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return new X509Certificate[]{};
-                    }
-                }
-        };
     }
 
     /**

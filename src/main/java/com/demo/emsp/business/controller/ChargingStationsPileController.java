@@ -16,12 +16,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author muyoufang
@@ -29,7 +27,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/business/charging_stations_pile")
-@Api(value = "充电桩 Controller",tags = {"充电桩"})
+@Api(value = "充电桩 Controller", tags = {"充电桩"})
 public class ChargingStationsPileController {
     @Autowired
     private IChargingStationsPileService service;
@@ -62,7 +60,7 @@ public class ChargingStationsPileController {
     @ApiOperation(value = "详情")
     public ResponseEntity<R> getInfo(@NotNull(message = "id不能为空") @PathVariable("id") Integer id) {
         ChargingStationPile result = service.getById(id);
-        if(result == null){
+        if (result == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(R.error("查询数据不存在"));
         }
         return ResponseEntity.ok(R.ok(result));
